@@ -36,8 +36,8 @@
 
 <script setup>
 
-    import { useActions } from '@/composables/useActions'
-    import { useLocalization } from '@/composables/useLocalization'
+//    import { useActions } from '@/composables/useActions'
+//    import { useLocalization } from '@/composables/useLocalization'
     import IconActionToolbar from './IconActionToolbar.vue'
     import { computed, getCurrentInstance } from 'vue'
 
