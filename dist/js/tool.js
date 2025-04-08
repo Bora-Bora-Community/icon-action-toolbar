@@ -8932,6 +8932,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
             }
           });
         }
+        console.log(Nova.$router.page);
         if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
           actions.push({
             name: __('Delete Resource'),
