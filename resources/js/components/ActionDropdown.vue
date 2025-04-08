@@ -174,10 +174,9 @@
             }
 
             console.log("INFO:", resource, Nova);
-          // Replace 'yourObject' with your object and 'searchString' with the value you're looking for.
-          console.log(findOccurrences(Nova, 'Nova.Index'));
+            console.log(findOccurrences(Nova, 'Nova.Index'));
 
-          if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 
                 actions.push({
                     name: __('Delete Resource'),
