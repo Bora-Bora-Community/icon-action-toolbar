@@ -174,7 +174,7 @@
             }
 
             console.log("INFO:", resource, Nova);
-            console.log(findOccurrences(Nova, 'Nova.Index'));
+            console.log(JSON.stringify(Nova, null, 2));
 
             if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 

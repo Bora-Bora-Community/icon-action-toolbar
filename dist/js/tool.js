@@ -8949,7 +8949,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           });
         }
         console.log("INFO:", resource, Nova);
-        console.log(_findOccurrences(Nova, 'Nova.Index'));
+        console.log(JSON.stringify(Nova, null, 2));
         if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
           actions.push({
             name: __('Delete Resource'),
