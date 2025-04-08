@@ -8935,18 +8935,16 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
         //            console.log("INFO:", resource, Nova);
         //            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
-        if (resource.authorizedToDelete && !resource.softDeleted) {
-          actions.push({
-            name: __('Delete Resource'),
-            uriKey: '__delete-resource-action__',
-            iconActionToolbar: {
-              icon: config.icons.delete_resource
-            },
-            onClick: function onClick() {
-              return instance.parent.ctx.openDeleteModal();
-            }
-          });
-        }
+        //             if (resource.authorizedToDelete && !resource.softDeleted) {
+        //
+        //                 actions.push({
+        //                     name: __('Delete Resource'),
+        //                     uriKey: '__delete-resource-action__',
+        //                     iconActionToolbar: { icon: config.icons.delete_resource },
+        //                     onClick: () => instance.parent.ctx.openDeleteModal(),
+        //                 })
+        //
+        //             }
       }
       return actions;
     });
