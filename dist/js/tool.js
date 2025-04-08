@@ -8836,7 +8836,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
   },
   emits: ['actionExecuted', 'show-preview'],
   setup: function setup(__props, _ref) {
-    var _this = this;
     var __expose = _ref.expose,
       __emit = _ref.emit;
     __expose();
@@ -8933,11 +8932,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
             }
           });
         }
-        console.log("INFO:", resource, Nova);
-        // Usage example:
-        //const safeString = JSON.stringify(trimObject(Nova, 10), null, 2);
-        console.log(_this.$route);
 
+        //            console.log("INFO:", resource, Nova);
         //            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
         if (resource.authorizedToDelete && !resource.softDeleted) {
           actions.push({
