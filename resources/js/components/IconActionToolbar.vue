@@ -55,8 +55,9 @@
         props: [ 'actions', 'standalone', 'parentType' ],
         computed: {
             isDetailView() {
-                return Nova.$router.page.component === 'Nova.Detail'
-                    && this.parentType === 'DetailActionDropdown.vue'
+              return this.parentType === 'DetailActionDropdown.vue'
+                // return Nova.$router.page.component === 'Nova.Detail'
+                //     && this.parentType === 'DetailActionDropdown.vue'
             },
         },
     }

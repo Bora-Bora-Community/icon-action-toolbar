@@ -9164,7 +9164,9 @@ __webpack_require__.r(__webpack_exports__);
   props: ['actions', 'standalone', 'parentType'],
   computed: {
     isDetailView: function isDetailView() {
-      return Nova.$router.page.component === 'Nova.Detail' && this.parentType === 'DetailActionDropdown.vue';
+      return this.parentType === 'DetailActionDropdown.vue';
+      // return Nova.$router.page.component === 'Nova.Detail'
+      //     && this.parentType === 'DetailActionDropdown.vue'
     }
   }
 });
