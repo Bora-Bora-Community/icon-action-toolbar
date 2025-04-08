@@ -40,13 +40,6 @@
     import { useLocalization } from '@/composables/useLocalization'
     import IconActionToolbar from './IconActionToolbar.vue'
     import { computed, getCurrentInstance } from 'vue'
-    import { useRoute } from 'vue-router';
-
-    const route = useRoute();
-console.log("Route:", route);
-
-    const isIndexPage = computed(() => route.name === 'index' || route.name?.endsWith('.index'));
-    const isDetailPage = computed(() => route.name === 'detail' || route.name?.endsWith('.detail'));
 
     const emitter = defineEmits([ 'actionExecuted', 'show-preview' ])
 
@@ -169,7 +162,8 @@ console.log("Route:", route);
             //const safeString = JSON.stringify(trimObject(Nova, 10), null, 2);
             console.log(this.$route);
 
-            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+//            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+              if (resource.authorizedToDelete && !resource.softDeleted) {
 
                 actions.push({
                     name: __('Delete Resource'),
