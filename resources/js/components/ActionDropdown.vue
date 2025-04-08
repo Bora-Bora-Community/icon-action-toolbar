@@ -157,7 +157,7 @@
 
             }
 
-            console.log("INFO:",resource, Nova);
+            console.log("INFO:", resource, Nova);
             if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 
                 actions.push({
