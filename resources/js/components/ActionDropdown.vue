@@ -101,6 +101,22 @@
         emitter('actionExecuted')
     }
 
+    const findOccurrences = function (obj, searchStr, currentPath = '') {
+      let matches = [];
+      if (typeof obj !== 'object' || obj === null) return matches;
+
+      for (const key in obj) {
+        const value = obj[key];
+        const newPath = currentPath ? `${currentPath}.${key}` : key;
+        if (typeof value === 'string' && value.includes(searchStr)) {
+          matches.push(newPath);
+        } else if (typeof value === 'object') {
+          matches = matches.concat(findOccurrences(value, searchStr, newPath));
+        }
+      }
+      return matches;
+    }
+
     const availableActions = computed(() => {
 
         const actions = [ ...props.actions ]
@@ -158,7 +174,10 @@
             }
 
             console.log("INFO:", resource, Nova);
-            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+          // Replace 'yourObject' with your object and 'searchString' with the value you're looking for.
+          console.log(findOccurrences(Nova, 'Nova.Index'));
+
+          if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 
                 actions.push({
                     name: __('Delete Resource'),

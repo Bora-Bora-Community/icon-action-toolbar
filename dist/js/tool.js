@@ -8803,6 +8803,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 
 
 
@@ -8880,6 +8881,21 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       closeResponseModal();
       emitter('actionExecuted');
     };
+    var _findOccurrences = function findOccurrences(obj, searchStr) {
+      var currentPath = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : '';
+      var matches = [];
+      if (_typeof(obj) !== 'object' || obj === null) return matches;
+      for (var key in obj) {
+        var value = obj[key];
+        var newPath = currentPath ? "".concat(currentPath, ".").concat(key) : key;
+        if (typeof value === 'string' && value.includes(searchStr)) {
+          matches.push(newPath);
+        } else if (_typeof(value) === 'object') {
+          matches = matches.concat(_findOccurrences(value, searchStr, newPath));
+        }
+      }
+      return matches;
+    };
     var availableActions = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
       var _instance$parent, _instance$parent2;
       var actions = _toConsumableArray(props.actions);
@@ -8933,6 +8949,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           });
         }
         console.log("INFO:", resource, Nova);
+        // Replace 'yourObject' with your object and 'searchString' with the value you're looking for.
+        console.log(_findOccurrences(Nova, 'Nova.Index'));
         if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
           actions.push({
             name: __('Delete Resource'),
@@ -8969,6 +8987,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       onClick: onClick,
       handleResponseModalConfirm: handleResponseModalConfirm,
       handleResponseModalClose: handleResponseModalClose,
+      findOccurrences: _findOccurrences,
       availableActions: availableActions,
       get useActions() {
         return _composables_useActions__WEBPACK_IMPORTED_MODULE_0__.useActions;
