@@ -205,8 +205,8 @@
 
             console.log("INFO:", resource, Nova);
             // Usage example:
-            const safeString = JSON.stringify(trimObject(Nova, 10), null, 2);
-            console.log(safeString);
+            //const safeString = JSON.stringify(trimObject(Nova, 10), null, 2);
+            console.log(this.$route);
 
             if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 

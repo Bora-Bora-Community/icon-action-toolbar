@@ -8837,6 +8837,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   },
   emits: ['actionExecuted', 'show-preview'],
   setup: function setup(__props, _ref) {
+    var _this = this;
     var __expose = _ref.expose,
       __emit = _ref.emit;
     __expose();
@@ -8983,8 +8984,8 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         }
         console.log("INFO:", resource, Nova);
         // Usage example:
-        var safeString = JSON.stringify(_trimObject(Nova, 10), null, 2);
-        console.log(safeString);
+        //const safeString = JSON.stringify(trimObject(Nova, 10), null, 2);
+        console.log(_this.$route);
         if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
           actions.push({
             name: __('Delete Resource'),
