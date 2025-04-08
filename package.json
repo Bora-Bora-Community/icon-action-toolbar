@@ -17,7 +17,10 @@
         "vue-loader": "^17.4.2"
     },
     "dependencies": {
+        "axios": "^1.8.4",
         "composables": "^1.0.0",
-        "laravel-nova-ui": "^0.4.12"
+        "laravel-nova-ui": "^0.4.12",
+        "uid": "^2.0.2",
+        "vuex": "^4.1.0"
     }
 }
