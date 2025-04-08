@@ -40,6 +40,13 @@
     import { useLocalization } from '@/composables/useLocalization'
     import IconActionToolbar from './IconActionToolbar.vue'
     import { computed, getCurrentInstance } from 'vue'
+    import { useRoute } from 'vue-router';
+
+    const route = useRoute();
+console.log("Route:", route);
+
+    const isIndexPage = computed(() => route.name === 'index' || route.name?.endsWith('.index'));
+    const isDetailPage = computed(() => route.name === 'detail' || route.name?.endsWith('.detail'));
 
     const emitter = defineEmits([ 'actionExecuted', 'show-preview' ])
 
@@ -99,52 +106,6 @@
     const handleResponseModalClose = () => {
         closeResponseModal()
         emitter('actionExecuted')
-    }
-
-    const findOccurrences = function (obj, searchStr, currentPath = '') {
-      let matches = [];
-      if (typeof obj !== 'object' || obj === null) return matches;
-
-      for (const key in obj) {
-        const value = obj[key];
-        const newPath = currentPath ? `${currentPath}.${key}` : key;
-        if (typeof value === 'string' && value.includes(searchStr)) {
-          matches.push(newPath);
-        } else if (typeof value === 'object') {
-          matches = matches.concat(findOccurrences(value, searchStr, newPath));
-        }
-      }
-      return matches;
-    }
-
-    const trimObject = function(obj, maxDepth = 2, currentDepth = 0, seen = new WeakSet()) {
-      if (currentDepth > maxDepth) {
-        // Replace deeper objects with a placeholder.
-        return Object.prototype.toString.call(obj);
-      }
-
-      if (obj && typeof obj === 'object') {
-        // Handle circular references.
-        if (seen.has(obj)) {
-          return '[Circular]';
-        }
-        seen.add(obj);
-
-        // Recursively trim arrays or objects.
-        if (Array.isArray(obj)) {
-          return obj.map(item => trimObject(item, maxDepth, currentDepth + 1, seen));
-        } else {
-          const trimmed = {};
-          for (const key in obj) {
-            if (Object.hasOwn(obj, key)) {
-              trimmed[key] = trimObject(obj[key], maxDepth, currentDepth + 1, seen);
-            }
-          }
-          return trimmed;
-        }
-      }
-      // Return non-objects (primitive values) as is.
-      return obj;
     }
 
     const availableActions = computed(() => {
