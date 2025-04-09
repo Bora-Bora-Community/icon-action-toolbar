@@ -11068,6 +11068,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
         if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
+          console.log("detailsPAge");
           actions.push({
             name: __('Delete Resource'),
             uriKey: '__delete-resource-action__',

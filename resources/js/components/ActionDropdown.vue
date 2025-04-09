@@ -202,7 +202,7 @@
             })
 
             if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
-
+console.log("detailsPAge");
                 actions.push({
                     name: __('Delete Resource'),
                     uriKey: '__delete-resource-action__',
