@@ -59,7 +59,6 @@
         errors,
         actionModalVisible,
         responseModalVisible,
-        openConfirmationModal,
         closeConfirmationModal,
         closeResponseModal,
         handleActionClick,
@@ -76,19 +75,13 @@
     const parentType = instance.parent.vnode.type.__file
 
     const onClick = event => {
-
         const action = availableActions.value.find(element => element.uriKey === event)
 
         if (typeof action.onClick === 'function') {
-
             action.onClick()
-
         } else {
-
             handleActionClick(event)
-
         }
-
     }
 
     const handleResponseModalConfirm = () => {
@@ -99,36 +92,6 @@
     const handleResponseModalClose = () => {
         closeResponseModal()
         emitter('actionExecuted')
-    }
-
-    const trimObject = function(obj, maxDepth = 2, currentDepth = 0, seen = new WeakSet()) {
-      if (currentDepth > maxDepth) {
-        // Replace deeper objects with a placeholder.
-        return Object.prototype.toString.call(obj);
-      }
-
-      if (obj && typeof obj === 'object') {
-        // Handle circular references.
-        if (seen.has(obj)) {
-          return '[Circular]';
-        }
-        seen.add(obj);
-
-        // Recursively trim arrays or objects.
-        if (Array.isArray(obj)) {
-          return obj.map(item => trimObject(item, maxDepth, currentDepth + 1, seen));
-        } else {
-          const trimmed = {};
-          for (const key in obj) {
-            if (Object.hasOwn(obj, key)) {
-              trimmed[key] = trimObject(obj[key], maxDepth, currentDepth + 1, seen);
-            }
-          }
-          return trimmed;
-        }
-      }
-      // Return non-objects (primitive values) as is.
-      return obj;
     }
 
     const availableActions = computed(() => {
@@ -156,10 +119,8 @@
                         }).replace(Nova.config('base'), '')
 
                         Nova.visit(url)
-
                     },
                 })
-
             }
 
             if (resource.authorizedToView && resource.previewHasFields) {
@@ -170,7 +131,6 @@
                     iconActionToolbar: { icon: config.icons.preview },
                     onClick: () => instance.parent.emit('show-preview'),
                 })
-
             }
 
             if (currentUser.canImpersonate && resource.authorizedToImpersonate) {
@@ -184,7 +144,6 @@
                         resourceId: resource.id.value,
                     }),
                 })
-
             }
 
             const isIndexPage = computed(() => {
@@ -199,10 +158,6 @@
                 // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
-
-            console.log('Resource:', resource.id.value);
-            console.log('Selected:', props.selectedResources[0]);
-            console.log('Via:     ', props.viaResourceId);
 
             if (resource.authorizedToDelete
                 && !resource.softDeleted
@@ -219,7 +174,6 @@
         }
 
         return actions
-
     })
 
 </script>
