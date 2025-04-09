@@ -200,9 +200,14 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
-            console.log('PROPS:', props);
+            console.log('Resource:', resource.id.value);
+            console.log('Selected:', props.selectedResources[0]);
+            console.log('Via:     ', props.viaResourceId);
 
-            if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
+            if (resource.authorizedToDelete
+                && !resource.softDeleted
+                && isDetailPage.value
+                && (props.selectedResources[0] === props.viaResourceId)) {
                 actions.push({
                     name: __('Delete Resource'),
                     uriKey: '__delete-resource-action__',
