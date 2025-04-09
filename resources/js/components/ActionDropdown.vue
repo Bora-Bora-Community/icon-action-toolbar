@@ -191,9 +191,8 @@
             console.log("INFO", resource, Nova);
             console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
 
+            console.log("Resource ID:", Inertia);
 
-          const resourceId = window.__inertiaPage?.props?.resourceId;
-          console.log("Resource ID:", resourceId);
 
              // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
              //

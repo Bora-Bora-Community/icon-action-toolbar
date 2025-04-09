@@ -8924,7 +8924,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       var config = Nova.config('icon_action_toolbar');
       var isViaManyToMany = ((_instance$parent2 = instance.parent) === null || _instance$parent2 === void 0 || (_instance$parent2 = _instance$parent2.props) === null || _instance$parent2 === void 0 ? void 0 : _instance$parent2.viaManyToMany) === true;
       if (resource && isViaManyToMany === false) {
-        var _window$__inertiaPage;
         if (resource.authorizedToReplicate) {
           actions.push({
             name: __('Replicate'),
@@ -8971,8 +8970,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         }
         console.log("INFO", resource, Nova);
         console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
-        var resourceId = (_window$__inertiaPage = window.__inertiaPage) === null || _window$__inertiaPage === void 0 || (_window$__inertiaPage = _window$__inertiaPage.props) === null || _window$__inertiaPage === void 0 ? void 0 : _window$__inertiaPage.resourceId;
-        console.log("Resource ID:", resourceId);
+        console.log("Resource ID:", Inertia);
 
         // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
         //
