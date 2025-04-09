@@ -135,7 +135,6 @@
 
         const actions = [ ...props.actions ]
         const resource = instance.parent?.props?.resource
-        const props = instance.parent?.props
         const currentUser = Nova.store.getters[ 'currentUser' ]
         const config = Nova.config('icon_action_toolbar')
         const isViaManyToMany = instance.parent?.props?.viaManyToMany === true
