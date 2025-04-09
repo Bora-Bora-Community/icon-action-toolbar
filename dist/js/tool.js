@@ -11056,10 +11056,10 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             }
           });
         }
-        console.log("INFO", resource, Nova);
-        console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
         var page = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.usePage)();
-        console.log(page);
+        console.log("INFO", resource, Nova, page);
+        console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
+        console.log("INERTIA", JSON.stringify(_trimObject(page, 10), null, 2));
 
         // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
         //

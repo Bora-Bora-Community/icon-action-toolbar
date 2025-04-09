@@ -187,13 +187,13 @@
                 })
 
             }
-
-            console.log("INFO", resource, Nova);
-            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
-
-
             const page = usePage();
-            console.log(page);
+
+            console.log("INFO", resource, Nova, page);
+            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
+            console.log("INERTIA",JSON.stringify(trimObject(page, 10), null, 2));
+
+
 
              // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
              //
