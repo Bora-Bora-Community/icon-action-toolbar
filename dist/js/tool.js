@@ -8969,17 +8969,18 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         console.log("INFO", resource, Nova);
         console.log("RESOURCE", JSON.stringify(_trimObject(resource, 10), null, 2));
         console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
-
-        // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
-        //
-        //     actions.push({
-        //         name: __('Delete Resource'),
-        //         uriKey: '__delete-resource-action__',
-        //         iconActionToolbar: { icon: config.icons.delete_resource },
-        //         onClick: () => instance.parent.ctx.openDeleteModal(),
-        //     })
-        //
-        // }
+        if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+          actions.push({
+            name: __('Delete Resource'),
+            uriKey: '__delete-resource-action__',
+            iconActionToolbar: {
+              icon: config.icons.delete_resource
+            },
+            onClick: function onClick() {
+              return instance.parent.ctx.openDeleteModal();
+            }
+          });
+        }
       }
       return actions;
     });
