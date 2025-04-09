@@ -200,6 +200,8 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
+            console.log('resource', this.resource.fields);
+
             if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
                 actions.push({
                     name: __('Delete Resource'),

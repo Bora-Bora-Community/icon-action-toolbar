@@ -8837,6 +8837,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   },
   emits: ['actionExecuted', 'show-preview'],
   setup: function setup(__props, _ref) {
+    var _this = this;
     var __expose = _ref.expose,
       __emit = _ref.emit;
     __expose();
@@ -8977,6 +8978,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
+        console.log('resource', _this.resource.fields);
         if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
           actions.push({
             name: __('Delete Resource'),
