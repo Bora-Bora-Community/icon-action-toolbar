@@ -40,7 +40,6 @@
     import { useLocalization } from '@/composables/useLocalization'
     import IconActionToolbar from './IconActionToolbar.vue'
     import { computed, getCurrentInstance } from 'vue'
-    import { usePage } from '@inertiajs/inertia-vue3'
 
     const emitter = defineEmits([ 'actionExecuted', 'show-preview' ])
 
@@ -201,10 +200,7 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
-          console.log("Path:", window.location.pathname, isDetailPage.value);
-
             if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
-console.log("detailsPage");
                 actions.push({
                     name: __('Delete Resource'),
                     uriKey: '__delete-resource-action__',
