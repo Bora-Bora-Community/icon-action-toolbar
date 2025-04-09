@@ -8803,6 +8803,7 @@ function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) 
 function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
 function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
 function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 
 
 
@@ -8880,6 +8881,39 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       closeResponseModal();
       emitter('actionExecuted');
     };
+    var _trimObject = function trimObject(obj) {
+      var maxDepth = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : 2;
+      var currentDepth = arguments.length > 2 && arguments[2] !== undefined ? arguments[2] : 0;
+      var seen = arguments.length > 3 && arguments[3] !== undefined ? arguments[3] : new WeakSet();
+      if (currentDepth > maxDepth) {
+        // Replace deeper objects with a placeholder.
+        return Object.prototype.toString.call(obj);
+      }
+      if (obj && _typeof(obj) === 'object') {
+        // Handle circular references.
+        if (seen.has(obj)) {
+          return '[Circular]';
+        }
+        seen.add(obj);
+
+        // Recursively trim arrays or objects.
+        if (Array.isArray(obj)) {
+          return obj.map(function (item) {
+            return _trimObject(item, maxDepth, currentDepth + 1, seen);
+          });
+        } else {
+          var trimmed = {};
+          for (var key in obj) {
+            if (Object.hasOwn(obj, key)) {
+              trimmed[key] = _trimObject(obj[key], maxDepth, currentDepth + 1, seen);
+            }
+          }
+          return trimmed;
+        }
+      }
+      // Return non-objects (primitive values) as is.
+      return obj;
+    };
     var availableActions = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
       var _instance$parent, _instance$parent2;
       var actions = _toConsumableArray(props.actions);
@@ -8932,19 +8966,20 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
             }
           });
         }
+        console.log("INFO:", resource, Nova);
+        console.log("RESOURCE", JSON.stringify(_trimObject(resource, 10), null, 2));
+        console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
 
-        //            console.log("INFO:", resource, Nova);
-        //            if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
-        //             if (resource.authorizedToDelete && !resource.softDeleted) {
+        // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
         //
-        //                 actions.push({
-        //                     name: __('Delete Resource'),
-        //                     uriKey: '__delete-resource-action__',
-        //                     iconActionToolbar: { icon: config.icons.delete_resource },
-        //                     onClick: () => instance.parent.ctx.openDeleteModal(),
-        //                 })
+        //     actions.push({
+        //         name: __('Delete Resource'),
+        //         uriKey: '__delete-resource-action__',
+        //         iconActionToolbar: { icon: config.icons.delete_resource },
+        //         onClick: () => instance.parent.ctx.openDeleteModal(),
+        //     })
         //
-        //             }
+        // }
       }
       return actions;
     });
@@ -8969,6 +9004,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       onClick: onClick,
       handleResponseModalConfirm: handleResponseModalConfirm,
       handleResponseModalClose: handleResponseModalClose,
+      trimObject: _trimObject,
       availableActions: availableActions,
       get useActions() {
         return _composables_useActions__WEBPACK_IMPORTED_MODULE_0__.useActions;
