@@ -11056,34 +11056,29 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             }
           });
         }
+        var isIndexPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
+          var url = window.location.pathname;
+          // Index pages typically end with the resource name
+          return /\/resources\/[\w\-]+$/.test(url);
+        });
         var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
           var url = window.location.pathname;
           // Match both numeric IDs and UUID patterns at the end of the URL
           // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
-        var isIndexPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
-          var url = window.location.pathname;
-          // Index pages typically end with the resource name
-          return /\/resources\/[\w\-]+$/.test(url);
-        });
-
-        //            console.log("INFO", resource, Nova, page);
-        //            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
-        //            console.log("INERTIA",JSON.stringify(trimObject(page, 10), null, 2));
-
-        console.log("isIndex:", isIndexPage.value);
-        console.log("isDetail:", isDetailPage.value);
-
-        // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
-        //
-        //    actions.push({
-        //        name: __('Delete Resource'),
-        //        uriKey: '__delete-resource-action__',
-        //        iconActionToolbar: { icon: config.icons.delete_resource },
-        //        onClick: () => instance.parent.ctx.openDeleteModal(),
-        //    })
-        // }
+        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
+          actions.push({
+            name: __('Delete Resource'),
+            uriKey: '__delete-resource-action__',
+            iconActionToolbar: {
+              icon: config.icons.delete_resource
+            },
+            onClick: function onClick() {
+              return instance.parent.ctx.openDeleteModal();
+            }
+          });
+        }
       }
       return actions;
     });
@@ -11295,6 +11290,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova-ui */ "laravel-nova-ui");
 /* harmony import */ var laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -11305,9 +11303,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ['actions', 'standalone', 'parentType'],
   computed: {
     isDetailView: function isDetailView() {
-      return this.parentType === 'DetailActionDropdown.vue';
-      // return Nova.$router.page.component === 'Nova.Detail'
-      //     && this.parentType === 'DetailActionDropdown.vue'
+      var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+        var url = window.location.pathname;
+        // Match both numeric IDs and UUID patterns at the end of the URL
+        // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+        return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
+      });
+      return isDetailPage && this.parentType === 'DetailActionDropdown.vue';
     }
   }
 });

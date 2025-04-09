@@ -188,36 +188,28 @@
 
             }
 
-            const isDetailPage = computed(() => {
-              const url = window.location.pathname
-              // Match both numeric IDs and UUID patterns at the end of the URL
-              // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
-              return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
-            })
-
             const isIndexPage = computed(() => {
-              const url = window.location.pathname
-              // Index pages typically end with the resource name
-              return /\/resources\/[\w\-]+$/.test(url)
+                const url = window.location.pathname
+                // Index pages typically end with the resource name
+                return /\/resources\/[\w\-]+$/.test(url)
             })
 
-//            console.log("INFO", resource, Nova, page);
-//            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
-//            console.log("INERTIA",JSON.stringify(trimObject(page, 10), null, 2));
+            const isDetailPage = computed(() => {
+                const url = window.location.pathname
+                // Match both numeric IDs and UUID patterns at the end of the URL
+                // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+                return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
+            })
 
-            console.log("isIndex:", isIndexPage.value);
-            console.log("isDetail:", isDetailPage.value);
+            if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
 
-
-             // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
-             //
-             //    actions.push({
-             //        name: __('Delete Resource'),
-             //        uriKey: '__delete-resource-action__',
-             //        iconActionToolbar: { icon: config.icons.delete_resource },
-             //        onClick: () => instance.parent.ctx.openDeleteModal(),
-             //    })
-             // }
+                actions.push({
+                    name: __('Delete Resource'),
+                    uriKey: '__delete-resource-action__',
+                    iconActionToolbar: { icon: config.icons.delete_resource },
+                    onClick: () => instance.parent.ctx.openDeleteModal(),
+                })
+            }
 
         }
 
