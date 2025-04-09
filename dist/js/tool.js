@@ -11058,17 +11058,20 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
         }
         var page = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.usePage)();
         var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
-          var _page$props$value;
-          return Nova.config('resourceMode') === 'detail' || ((_page$props$value = page.props.value) === null || _page$props$value === void 0 ? void 0 : _page$props$value.resourceMode) === 'detail';
+          var url = window.location.pathname;
+          // Detail pages typically have a numeric ID at the end of the URL
+          return /\/resources\/[\w\-]+\/\d+$/.test(url);
         });
         var isIndexPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
-          var _page$props$value2;
-          return Nova.config('resourceMode') === 'index' || ((_page$props$value2 = page.props.value) === null || _page$props$value2 === void 0 ? void 0 : _page$props$value2.resourceMode) === 'index';
+          var url = window.location.pathname;
+          // Index pages typically end with the resource name
+          return /\/resources\/[\w\-]+$/.test(url);
         });
-        console.log("INFO", resource, Nova, page);
-        console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
-        console.log("INERTIA", JSON.stringify(_trimObject(page, 10), null, 2));
-        console.log(page.props.resourceId);
+
+        //            console.log("INFO", resource, Nova, page);
+        //            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
+        //            console.log("INERTIA",JSON.stringify(trimObject(page, 10), null, 2));
+
         console.log("isIndex:", isIndexPage.value);
         console.log("isDetail:", isDetailPage.value);
 
