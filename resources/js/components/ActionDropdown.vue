@@ -135,6 +135,7 @@
 
         const actions = [ ...props.actions ]
         const resource = instance.parent?.props?.resource
+        const props = instance.parent?.props
         const currentUser = Nova.store.getters[ 'currentUser' ]
         const config = Nova.config('icon_action_toolbar')
         const isViaManyToMany = instance.parent?.props?.viaManyToMany === true
@@ -200,7 +201,7 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
-            console.log('resource', this.resource.fields);
+            console.log('PROPS:', props);
 
             if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
                 actions.push({

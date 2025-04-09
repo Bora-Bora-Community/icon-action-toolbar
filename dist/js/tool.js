@@ -8837,7 +8837,6 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
   },
   emits: ['actionExecuted', 'show-preview'],
   setup: function setup(__props, _ref) {
-    var _this = this;
     var __expose = _ref.expose,
       __emit = _ref.emit;
     __expose();
@@ -8916,12 +8915,13 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
       return obj;
     };
     var availableActions = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
-      var _instance$parent, _instance$parent2;
+      var _instance$parent, _instance$parent2, _instance$parent3;
       var actions = _toConsumableArray(props.actions);
       var resource = (_instance$parent = instance.parent) === null || _instance$parent === void 0 || (_instance$parent = _instance$parent.props) === null || _instance$parent === void 0 ? void 0 : _instance$parent.resource;
+      var props = (_instance$parent2 = instance.parent) === null || _instance$parent2 === void 0 ? void 0 : _instance$parent2.props;
       var currentUser = Nova.store.getters['currentUser'];
       var config = Nova.config('icon_action_toolbar');
-      var isViaManyToMany = ((_instance$parent2 = instance.parent) === null || _instance$parent2 === void 0 || (_instance$parent2 = _instance$parent2.props) === null || _instance$parent2 === void 0 ? void 0 : _instance$parent2.viaManyToMany) === true;
+      var isViaManyToMany = ((_instance$parent3 = instance.parent) === null || _instance$parent3 === void 0 || (_instance$parent3 = _instance$parent3.props) === null || _instance$parent3 === void 0 ? void 0 : _instance$parent3.viaManyToMany) === true;
       if (resource && isViaManyToMany === false) {
         if (resource.authorizedToReplicate) {
           actions.push({
@@ -8978,7 +8978,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
-        console.log('resource', _this.resource.fields);
+        console.log('PROPS:', props);
         if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
           actions.push({
             name: __('Delete Resource'),
