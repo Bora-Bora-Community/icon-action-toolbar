@@ -8966,7 +8966,7 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             }
           });
         }
-        console.log("INFO:", resource, Nova);
+        console.log("INFO", resource, Nova);
         console.log("RESOURCE", JSON.stringify(_trimObject(resource, 10), null, 2));
         console.log("NOVA", JSON.stringify(_trimObject(Nova, 10), null, 2));
 

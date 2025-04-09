@@ -187,7 +187,7 @@
 
             }
 
-            console.log("INFO:", resource, Nova);
+            console.log("INFO", resource, Nova);
             console.log("RESOURCE",JSON.stringify(trimObject(resource, 10), null, 2));
             console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
 
