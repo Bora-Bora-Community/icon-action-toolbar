@@ -40,7 +40,7 @@
     import { useLocalization } from '@/composables/useLocalization'
     import IconActionToolbar from './IconActionToolbar.vue'
     import { computed, getCurrentInstance } from 'vue'
-//    import { usePage } from '@inertiajs/inertia-vue3'
+    import { usePage } from '@inertiajs/inertia-vue3'
 
     const emitter = defineEmits([ 'actionExecuted', 'show-preview' ])
 
@@ -191,8 +191,9 @@
             console.log("INFO", resource, Nova);
             console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
 
-            console.log("Resource ID:", Inertia);
 
+            const page = usePage();
+            console.log(page);
 
              // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
              //
