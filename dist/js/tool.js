@@ -11067,8 +11067,8 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
           // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
-        console.log("Path:", window.location.pathname, isDetailPage);
-        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
+        console.log("Path:", window.location.pathname, isDetailPage.value);
+        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
           console.log("detailsPage");
           actions.push({
             name: __('Delete Resource'),

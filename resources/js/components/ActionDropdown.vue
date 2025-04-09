@@ -201,9 +201,9 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
-          console.log("Path:", window.location.pathname, isDetailPage);
+          console.log("Path:", window.location.pathname, isDetailPage.value);
 
-            if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage) {
+            if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value) {
 console.log("detailsPage");
                 actions.push({
                     name: __('Delete Resource'),
