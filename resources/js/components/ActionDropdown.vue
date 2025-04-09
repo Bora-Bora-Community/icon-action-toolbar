@@ -189,7 +189,7 @@
 
             console.log("INFO", resource, Nova);
             console.log("RESOURCE",JSON.stringify(trimObject(resource, 10), null, 2));
-            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
+            console.log("NOVA.store",JSON.stringify(trimObject(Nova.store, 10), null, 2));
 
              if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
 
