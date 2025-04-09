@@ -187,19 +187,19 @@
                 })
 
             }
-            const page = usePage();
 
-          const isDetailPage = computed(() => {
-            const url = window.location.pathname
-            // Detail pages typically have a numeric ID at the end of the URL
-            return /\/resources\/[\w\-]+\/\d+$/.test(url)
-          })
+            const isDetailPage = computed(() => {
+              const url = window.location.pathname
+              // Match both numeric IDs and UUID patterns at the end of the URL
+              // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+              return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
+            })
 
-          const isIndexPage = computed(() => {
-            const url = window.location.pathname
-            // Index pages typically end with the resource name
-            return /\/resources\/[\w\-]+$/.test(url)
-          })
+            const isIndexPage = computed(() => {
+              const url = window.location.pathname
+              // Index pages typically end with the resource name
+              return /\/resources\/[\w\-]+$/.test(url)
+            })
 
 //            console.log("INFO", resource, Nova, page);
 //            console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));

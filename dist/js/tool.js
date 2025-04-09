@@ -11056,11 +11056,11 @@ function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == 
             }
           });
         }
-        var page = (0,_inertiajs_inertia_vue3__WEBPACK_IMPORTED_MODULE_4__.usePage)();
         var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
           var url = window.location.pathname;
-          // Detail pages typically have a numeric ID at the end of the URL
-          return /\/resources\/[\w\-]+\/\d+$/.test(url);
+          // Match both numeric IDs and UUID patterns at the end of the URL
+          // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+          return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
         var isIndexPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
           var url = window.location.pathname;
