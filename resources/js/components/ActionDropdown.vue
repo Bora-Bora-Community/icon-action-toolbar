@@ -189,10 +189,22 @@
             }
             const page = usePage();
 
+          const isDetailPage = computed(() => {
+            return Nova.config('resourceMode') === 'detail' ||
+                page.props.value?.resourceMode === 'detail'
+          })
+
+          const isIndexPage = computed(() => {
+            return Nova.config('resourceMode') === 'index' ||
+                page.props.value?.resourceMode === 'index'
+          })
+
             console.log("INFO", resource, Nova, page);
             console.log("NOVA",JSON.stringify(trimObject(Nova, 10), null, 2));
             console.log("INERTIA",JSON.stringify(trimObject(page, 10), null, 2));
-
+            console.log(page.props.resourceId);
+            console.log("isIndex:", isIndexPage.value);
+            console.log("isDetail:", isDetailPage.value);
 
 
              // if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
