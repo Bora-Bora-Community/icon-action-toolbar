@@ -8845,7 +8845,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       errors = _useActions.errors,
       actionModalVisible = _useActions.actionModalVisible,
       responseModalVisible = _useActions.responseModalVisible,
-      openConfirmationModal = _useActions.openConfirmationModal,
       closeConfirmationModal = _useActions.closeConfirmationModal,
       closeResponseModal = _useActions.closeResponseModal,
       handleActionClick = _useActions.handleActionClick,
@@ -8932,8 +8931,18 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
             }
           });
         }
-        console.log(Nova.$router.page);
-        if (resource.authorizedToDelete && !resource.softDeleted && Nova.$router.page.component !== 'Nova.Index') {
+        var isIndexPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
+          var url = window.location.pathname;
+          // Index pages typically end with the resource name
+          return /\/resources\/[\w\-]+$/.test(url);
+        });
+        var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_3__.computed)(function () {
+          var url = window.location.pathname;
+          // Match both numeric IDs and UUID patterns at the end of the URL
+          // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+          return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
+        });
+        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value && props.selectedResources.length === 1 && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === undefined)) {
           actions.push({
             name: __('Delete Resource'),
             uriKey: '__delete-resource-action__',
@@ -8954,7 +8963,6 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       errors: errors,
       actionModalVisible: actionModalVisible,
       responseModalVisible: responseModalVisible,
-      openConfirmationModal: openConfirmationModal,
       closeConfirmationModal: closeConfirmationModal,
       closeResponseModal: closeResponseModal,
       handleActionClick: handleActionClick,
@@ -9152,6 +9160,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! laravel-nova-ui */ "laravel-nova-ui");
 /* harmony import */ var laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(laravel_nova_ui__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! vue */ "vue");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_1__);
+
 
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   components: {
@@ -9162,7 +9173,13 @@ __webpack_require__.r(__webpack_exports__);
   props: ['actions', 'standalone', 'parentType'],
   computed: {
     isDetailView: function isDetailView() {
-      return Nova.$router.page.component === 'Nova.Detail' && this.parentType === 'DetailActionDropdown.vue';
+      var isDetailPage = (0,vue__WEBPACK_IMPORTED_MODULE_1__.computed)(function () {
+        var url = window.location.pathname;
+        // Match both numeric IDs and UUID patterns at the end of the URL
+        // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+        return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
+      });
+      return isDetailPage.value && this.parentType === 'DetailActionDropdown.vue';
     }
   }
 });

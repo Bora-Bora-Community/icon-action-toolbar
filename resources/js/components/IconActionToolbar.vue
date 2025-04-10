@@ -48,6 +48,7 @@
 <script>
 
     import { Icon, Button } from 'laravel-nova-ui'
+    import {computed} from "vue";
 
     export default {
         components: { Icon, Button },
@@ -55,8 +56,14 @@
         props: [ 'actions', 'standalone', 'parentType' ],
         computed: {
             isDetailView() {
-                return Nova.$router.page.component === 'Nova.Detail'
-                    && this.parentType === 'DetailActionDropdown.vue'
+                const isDetailPage = computed(() => {
+                    const url = window.location.pathname
+                    // Match both numeric IDs and UUID patterns at the end of the URL
+                    // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
+                    return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
+                })
+
+                return isDetailPage.value && this.parentType === 'DetailActionDropdown.vue'
             },
         },
     }
