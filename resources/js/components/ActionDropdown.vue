@@ -159,18 +159,6 @@ const availableActions = computed(() => {
       return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
     })
 
-    console.log('Resource:  ', resource.id.value);
-    console.log('Selected:  ', props.selectedResources[0]);
-    console.log('Via:       ', props.viaResourceId);
-
-    console.log('resource.authorizedToDelete', resource.authorizedToDelete);
-    console.log('!resource.softDeleted', !resource.softDeleted);
-    console.log('isDetailPage.value', isDetailPage.value);
-    console.log('props.selectedResources.length === 1', props.selectedResources.length === 1);
-    console.log('props.selectedResources[0] === props.viaResourceId', props.selectedResources[0] === props.viaResourceId);
-    console.log('props.viaResourceId === undefined', props.viaResourceId === undefined);
-
-
     if (resource.authorizedToDelete
         && !resource.softDeleted
         && isDetailPage.value
@@ -183,7 +171,6 @@ const availableActions = computed(() => {
         onClick: () => instance.parent.ctx.openDeleteModal(),
       })
     }
-
   }
 
   return actions
