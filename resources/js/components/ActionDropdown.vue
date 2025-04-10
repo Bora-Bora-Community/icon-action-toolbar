@@ -162,7 +162,7 @@
             if (resource.authorizedToDelete
                 && !resource.softDeleted
                 && isDetailPage.value
-                && (props.selectedResources[0] === props.viaResourceId)) {
+                && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === null)) {
                 actions.push({
                     name: __('Delete Resource'),
                     uriKey: '__delete-resource-action__',

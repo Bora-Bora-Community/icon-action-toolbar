@@ -8942,7 +8942,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
           // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
           return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url);
         });
-        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value && props.selectedResources[0] === props.viaResourceId) {
+        if (resource.authorizedToDelete && !resource.softDeleted && isDetailPage.value && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === null)) {
           actions.push({
             name: __('Delete Resource'),
             uriKey: '__delete-resource-action__',
