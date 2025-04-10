@@ -168,14 +168,14 @@ const availableActions = computed(() => {
     console.log('isDetailPage.value', isDetailPage.value);
     console.log('props.selectedResources.length === 1', props.selectedResources.length === 1);
     console.log('props.selectedResources[0] === props.viaResourceId', props.selectedResources[0] === props.viaResourceId);
-    console.log('props.viaResourceId === null', props.viaResourceId === null);
+    console.log('props.viaResourceId === undefined', props.viaResourceId === undefined);
 
 
     if (resource.authorizedToDelete
         && !resource.softDeleted
         && isDetailPage.value
         && props.selectedResources.length === 1
-        && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === null)) {
+        && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === undefined)) {
       actions.push({
         name: __('Delete Resource'),
         uriKey: '__delete-resource-action__',
