@@ -159,7 +159,13 @@
                 return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
             })
 
-            if (resource.authorizedToDelete
+          console.log('Resource:  ', resource.id.value);
+          console.log('Selected:  ', props.selectedResources[0]);
+          console.log('Via:       ', props.viaResourceId);
+          console.log('Properties:', props);
+          console.log('Parent:    ', instance.parent);
+
+          if (resource.authorizedToDelete
                 && !resource.softDeleted
                 && isDetailPage.value
                 && (props.selectedResources[0] === props.viaResourceId || props.viaResourceId === null)) {
