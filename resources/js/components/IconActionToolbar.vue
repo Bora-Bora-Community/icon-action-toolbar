@@ -38,7 +38,7 @@
 
             </div>
 
-            <Dropdown v-if="dropdownActions.length > 0">
+            <Dropdown v-if="dropdownActions.length > 0" class="ml-auto">
                 <template #default>
                     <button
                         v-tooltip="'Actions'"
