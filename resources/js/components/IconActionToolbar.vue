@@ -2,9 +2,9 @@
 
     <div :class="{ 'icon-action-toolbar-wrapper': standalone && isDetailView }">
 
-        <div v-if="iconActions.length > 0 || dropdownActions.length > 0"
+        <div v-if="iconActions.length > 0"
              :class="{ 'rounded': standalone, 'rounded bg-gray-700/5 dark:bg-gray-950': !standalone }"
-             class="flex dark:focus:ring-gray-600 justify-evenly items-center">
+             class="flex dark:focus:ring-gray-600 items-center">
 
             <div v-for="{ iconActionToolbar, destructive, uriKey, name } of iconActions" :key="uriKey">
 
@@ -38,36 +38,6 @@
 
             </div>
 
-            <Dropdown v-if="dropdownActions.length > 0" class="ml-auto">
-                <template #default>
-                    <button
-                        v-tooltip="'Actions'"
-                        type="button"
-                        :class="{
-                            'rounded hover:bg-gray-200 dark:hover:bg-gray-800 focus:outline-none focus:ring px-3 hover:text-gray-500': standalone && isDetailView,
-                            'px-2': !standalone || !isDetailView,
-                        }"
-                        class="inline-flex items-center justify-center toolbar-button h-9 dark:text-gray-400 text-gray-500 hover:[&:not(:disabled)]:text-primary-500 dark:hover:[&:not(:disabled)]:text-primary-500">
-                        <Icon name="ellipsis-horizontal"/>
-                    </button>
-                </template>
-                <template #menu>
-                    <DropdownMenu width="auto">
-                        <div class="py-1">
-                            <DropdownMenuItem
-                                v-for="action in dropdownActions"
-                                :key="action.uriKey"
-                                as="button"
-                                class="border-none"
-                                @click="$emit('click', action.uriKey)"
-                            >
-                                {{ action.name }}
-                            </DropdownMenuItem>
-                        </div>
-                    </DropdownMenu>
-                </template>
-            </Dropdown>
-
         </div>
 
     </div>
@@ -99,7 +69,6 @@
     })
 
     const iconActions = computed(() => props.actions.filter(a => a.iconActionToolbar))
-    const dropdownActions = computed(() => props.actions.filter(a => !a.iconActionToolbar))
 
 </script>
 

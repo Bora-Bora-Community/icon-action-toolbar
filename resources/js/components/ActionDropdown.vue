@@ -32,6 +32,34 @@
       @click="onClick"
       :standalone="true"/>
 
+  <div v-if="dropdownActions.length > 0" style="order: 99">
+  <Dropdown>
+    <template #default>
+      <button
+          v-tooltip="'Actions'"
+          type="button"
+          class="inline-flex items-center justify-center h-9 w-9 dark:text-gray-400 text-gray-500 hover:[&:not(:disabled)]:text-primary-500 dark:hover:[&:not(:disabled)]:text-primary-500">
+        <Icon name="ellipsis-horizontal"/>
+      </button>
+    </template>
+    <template #menu>
+      <DropdownMenu width="auto">
+        <div class="py-1">
+          <DropdownMenuItem
+              v-for="action in dropdownActions"
+              :key="action.uriKey"
+              as="button"
+              class="border-none"
+              @click="onClick(action.uriKey)"
+          >
+            {{ action.name }}
+          </DropdownMenuItem>
+        </div>
+      </DropdownMenu>
+    </template>
+  </Dropdown>
+  </div>
+
 </template>
 
 <script setup>
@@ -39,6 +67,7 @@
 import {useActions} from '@/composables/useActions'
 import {useLocalization} from '@/composables/useLocalization'
 import {useNovaPage} from '../composables/useNovaPage'
+import {Icon} from 'laravel-nova-ui'
 import IconActionToolbar from './IconActionToolbar.vue'
 import {computed, getCurrentInstance} from 'vue'
 
@@ -171,5 +200,7 @@ const availableActions = computed(() => {
 
   return actions
 })
+
+const dropdownActions = computed(() => availableActions.value.filter(a => !a.iconActionToolbar))
 
 </script>
