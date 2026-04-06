@@ -20,8 +20,8 @@
         v-if="responseModalVisible"
         :show="responseModalVisible"
         :is="actionResponseData?.modal"
-        @confirm="handleResponseModalConfirm"
-        @close="handleResponseModalClose"
+        @confirm="handleResponseModalDismiss"
+        @close="handleResponseModalDismiss"
         :data="actionResponseData"/>
 
   </div>
@@ -38,6 +38,7 @@
 
 import {useActions} from '@/composables/useActions'
 import {useLocalization} from '@/composables/useLocalization'
+import {useNovaPage} from '../composables/useNovaPage'
 import IconActionToolbar from './IconActionToolbar.vue'
 import {computed, getCurrentInstance} from 'vue'
 
@@ -72,10 +73,23 @@ const {__} = useLocalization()
 const instance = getCurrentInstance()
 
 const runAction = () => executeAction(() => emitter('actionExecuted'))
-const parentType = instance.parent.vnode.type.__file
+const {isDetailPage} = useNovaPage()
+
+// parentType identifies which Nova component hosts this ActionDropdown.
+// __file is available in dev builds but stripped in production; name may also be absent
+// for anonymous SFCs. The fallback infers context from the Inertia page type.
+const parentType = computed(() => {
+  const parent = instance.parent
+  const raw = parent?.vnode?.type?.__file || parent?.vnode?.type?.name
+  const name = raw?.split('/')?.pop()?.replace('.vue', '') ?? null
+  if (name) return name
+  return isDetailPage.value ? 'DetailActionDropdown' : 'InlineActionDropdown'
+})
 
 const onClick = event => {
   const action = availableActions.value.find(element => element.uriKey === event)
+
+  if (!action) return
 
   if (typeof action.onClick === 'function') {
     action.onClick()
@@ -84,12 +98,7 @@ const onClick = event => {
   }
 }
 
-const handleResponseModalConfirm = () => {
-  closeResponseModal()
-  emitter('actionExecuted')
-}
-
-const handleResponseModalClose = () => {
+const handleResponseModalDismiss = () => {
   closeResponseModal()
   emitter('actionExecuted')
 }
@@ -133,7 +142,7 @@ const availableActions = computed(() => {
       })
     }
 
-    if (currentUser.canImpersonate && resource.authorizedToImpersonate) {
+    if (currentUser?.canImpersonate && resource.authorizedToImpersonate) {
 
       actions.push({
         name: __('Impersonate'),
@@ -145,19 +154,6 @@ const availableActions = computed(() => {
         }),
       })
     }
-
-    const isIndexPage = computed(() => {
-      const url = window.location.pathname
-      // Index pages typically end with the resource name
-      return /\/resources\/[\w\-]+$/.test(url)
-    })
-
-    const isDetailPage = computed(() => {
-      const url = window.location.pathname
-      // Match both numeric IDs and UUID patterns at the end of the URL
-      // UUID pattern: xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx (where x is hex)
-      return /\/resources\/[\w\-]+\/(\d+|[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12})$/i.test(url)
-    })
 
     if (resource.authorizedToDelete
         && !resource.softDeleted
